@@ -1,7 +1,7 @@
 {
   "name": "stingray-lang",
   "stingray": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "language": "stingray",
   "runtime": "browser-node-hybrid",
   "target": ["web", "desktop", "mobile"],
