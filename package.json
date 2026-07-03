@@ -1,6 +1,6 @@
 {
   "name": "stingray-lang",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Stingray - HTML + CSS + JS + React unified language. Extension: .stngr",
   "main": "bin/stingray.js",
   "bin": {

@@ -1,7 +1,7 @@
 {
   "fileTypes": ["stngr"],
   "icon": {
-    "light": "../assets/logo.png",
-    "dark": "../assets/logo.png"
+    "light": "../Assets/logo.png",
+    "dark": "../Assets/logo.png"
   }
 }
