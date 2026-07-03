@@ -9,7 +9,8 @@
     "sr": "./bin/stingray.js"
   },
   "scripts": {
-    "postinstall": "node bin/stingray.js --install"
+    "postinstall": "node bin/stingray.js --install",
+    "deploy": "gh-pages -d pages -b gh-pages"
   },
   "keywords": [
     "stingray",
@@ -33,7 +34,7 @@
   "bugs": {
     "url": "https://github.com/stingray-lang/stingray/issues"
   },
-  "homepage": "https://stingray-lang.dev",
+  "homepage": "https://stingray-lang.github.io/stingray",
   "files": [
     "bin/",
     "src/",
@@ -46,10 +47,11 @@
     "*.md"
   ],
   "dependencies": {
+    "@material/web": "^2.2.0",
     "acorn": "^8.14.0",
+    "gh-pages": "^6.3.0",
     "terser": "^5.37.0",
-    "undici": "^7.8.0",
-    "@material/web": "^2.2.0"
+    "undici": "^7.8.0"
   },
   "devDependencies": {
     "react": "^19.0.0",
