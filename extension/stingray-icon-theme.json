@@ -1,0 +1,7 @@
+{
+  "fileTypes": ["stngr"],
+  "icon": {
+    "light": "../assets/logo.png",
+    "dark": "../assets/logo.png"
+  }
+}

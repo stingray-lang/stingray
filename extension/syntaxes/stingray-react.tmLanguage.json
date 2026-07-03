@@ -1,0 +1,72 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Stingray React",
+  "scopeName": "javascriptreact.stingray",
+  "patterns": [
+    { "include": "#jsx-tags" },
+    { "include": "#jsx-attributes" },
+    { "include": "#jsx-children" },
+    { "include": "#jsx-self-closing" },
+    { "include": "source.js" }
+  ],
+  "repository": {
+    "jsx-tags": {
+      "begin": "(<)([a-zA-Z][a-zA-Z0-9:.@-]*)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.jsx.stingray" },
+        "2": { "name": "entity.name.tag.jsx.stingray" }
+      },
+      "end": "(/>|>)",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.jsx.stingray" }
+      },
+      "patterns": [
+        { "include": "#jsx-attributes" },
+        { "include": "#jsx-tags" }
+      ]
+    },
+    "jsx-self-closing": {
+      "match": "<([a-zA-Z][a-zA-Z0-9:.@-]*)(?:\\s[^>]*)?\\s*/>",
+      "captures": {
+        "1": { "name": "entity.name.tag.jsx.stingray" }
+      }
+    },
+    "jsx-attributes": {
+      "patterns": [
+        {
+          "name": "entity.other.attribute-name.jsx.stingray",
+          "match": "[a-zA-Z:@][a-zA-Z0-9:.@-]*"
+        },
+        {
+          "name": "keyword.operator.assignment.jsx.stingray",
+          "match": "="
+        },
+        {
+          "name": "string.quoted.double.jsx.stingray",
+          "match": "\"[^\"]*\""
+        },
+        {
+          "name": "string.quoted.single.jsx.stingray",
+          "match": "'[^']*'"
+        },
+        {
+          "name": "meta.embedded.jsx.stingray",
+          "begin": "\\{",
+          "end": "\\}",
+          "patterns": [
+            { "include": "source.js" }
+          ]
+        }
+      ]
+    },
+    "jsx-children": {
+      "patterns": [
+        { "include": "#jsx-tags" },
+        {
+          "name": "text.jsx.stingray",
+          "match": "[^<{}]+"
+        }
+      ]
+    }
+  }
+}

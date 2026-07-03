@@ -1,0 +1,170 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Stingray CSS",
+  "scopeName": "css.stingray",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#at-rules" },
+    { "include": "#rules" },
+    { "include": "#properties" },
+    { "include": "#values" },
+    { "include": "#functions" },
+    { "include": "#selectors" },
+    { "include": "#variables" }
+  ],
+  "repository": {
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.block.css.stingray",
+          "begin": "/\\*",
+          "end": "\\*/"
+        },
+        {
+          "name": "comment.line.double-slash.css.stingray",
+          "begin": "//",
+          "end": "$"
+        }
+      ]
+    },
+    "at-rules": {
+      "patterns": [
+        {
+          "name": "keyword.control.at-rule.css.stingray",
+          "match": "@(media|supports|keyframes|font-face|import|charset|namespace|page|screen|print|font-feature-values|counter-style|property)\\b"
+        },
+        {
+          "begin": "(@)([a-zA-Z-]+)",
+          "end": "(;|\\{|$)",
+          "captures": {
+            "1": { "name": "punctuation.definition.keyword.css.stingray" },
+            "2": { "name": "keyword.control.at-rule.css.stingray" }
+          },
+          "patterns": [
+            { "include": "#comment" },
+            { "include": "#functions" },
+            { "include": "#values" }
+          ]
+        }
+      ]
+    },
+    "rules": {
+      "patterns": [
+        {
+          "begin": "([.#]?[a-zA-Z_-][a-zA-Z0-9_-]*)",
+          "end": "\\{",
+          "captures": {
+            "1": { "name": "entity.other.attribute-name.class.css.stingray" }
+          },
+          "patterns": [
+            { "include": "#selectors" }
+          ]
+        }
+      ]
+    },
+    "properties": {
+      "patterns": [
+        {
+          "name": "meta.property-name.css.stingray",
+          "match": "([a-zA-Z-]+)\\s*:"
+        },
+        {
+          "name": "punctuation.separator.key-value.css.stingray",
+          "match": ":"
+        },
+        {
+          "name": "punctuation.terminator.rule.css.stingray",
+          "match": ";"
+        }
+      ]
+    },
+    "values": {
+      "patterns": [
+        {
+          "name": "constant.numeric.css.stingray",
+          "match": "\\b\\d+(\\.\\d+)?(px|em|rem|%|vh|vw|deg|s|ms|fr|ch|ex|pt|pc|cm|mm|in|turn|rad|grad)?\\b"
+        },
+        {
+          "name": "string.quoted.double.css.stingray",
+          "match": "\"[^\"]*\""
+        },
+        {
+          "name": "string.quoted.single.css.stingray",
+          "match": "'[^']*'"
+        },
+        {
+          "name": "constant.language.css.stingray",
+          "match": "\\b(inherit|initial|unset|none|auto|normal|bold|italic|center|left|right|top|bottom|flex|grid|block|inline|inline-block|hidden|visible|absolute|relative|fixed|sticky|transparent|currentColor|currentColor|currentColor)\\b"
+        },
+        {
+          "name": "support.constant.css.stingray",
+          "match": "#[0-9a-fA-F]{3,8}\\b"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "support.function.css.stingray",
+          "match": "\\b(var|calc|env|url|attr|counter|counters|rgb|rgba|hsl|hsla|linear-gradient|radial-gradient|translate|rotate|scale|skew|matrix|perspective|brightness|contrast|grayscale|invert|saturate|sepia|drop-shadow|blur|clamp|min|max|mod|pow|sin|cos|atan2|floor|ceil|round)\\b"
+        },
+        {
+          "begin": "\\b(var)\\s*\\(",
+          "end": "\\)",
+          "captures": {
+            "1": { "name": "support.function.css.stingray" }
+          },
+          "patterns": [
+            { "include": "#variables" }
+          ]
+        },
+        {
+          "begin": "\\b(calc|min|max|clamp)\\s*\\(",
+          "end": "\\)",
+          "captures": {
+            "1": { "name": "support.function.calc.css.stingray" }
+          },
+          "patterns": [
+            { "include": "#values" }
+          ]
+        }
+      ]
+    },
+    "selectors": {
+      "patterns": [
+        {
+          "name": "entity.name.tag.css.stingray",
+          "match": "\\b(body|html|head|meta|title|link|style|script|div|span|p|h[1-6]|a|ul|ol|li|table|tr|td|th|form|input|button|select|textarea|label|img|section|article|header|footer|nav|main|aside|details|summary|dialog|canvas|video|audio|source|picture|iframe|embed|object|hr|br|pre|code|blockquote|mark|small|strong|em|i|b|u|abbr|cite|dfn|kbd|samp|sub|sup|time|data|meter|progress|q|del|ins)\\b"
+        },
+        {
+          "name": "entity.other.attribute-name.class.css.stingray",
+          "match": "\\.([a-zA-Z_-][a-zA-Z0-9_-]*)"
+        },
+        {
+          "name": "entity.other.attribute-name.id.css.stingray",
+          "match": "#([a-zA-Z_-][a-zA-Z0-9_-]*)"
+        },
+        {
+          "name": "keyword.other.stingray-pseudo",
+          "match": ":(hover|active|focus|visited|first-child|last-child|nth-child|nth-of-type|first-of-type|last-of-type|only-child|only-of-type|empty|not|is|where|has|root|target|before|after|placeholder|selection|checked|disabled|enabled|read-only|read-write|required|optional|valid|invalid|in-range|out-of-range|placeholder-shown|default|indeterminate|defined|lang|dir|fullscreen|focus-within|focus-visible|any-link|local-link|scope|target-within|target-thread|marker)"
+        },
+        {
+          "name": "keyword.other.stingray-pseudo-element",
+          "match": "::(before|after|first-line|first-letter|selection|placeholder|marker|backdrop|cue|grammar-error|spelling-error|target-text|highlight|placeholder-shown)"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.css.stingray",
+          "match": "--[a-zA-Z_-][a-zA-Z0-9_-]*"
+        },
+        {
+          "name": "meta.var.css.stingray",
+          "match": "\\$[a-zA-Z_-][a-zA-Z0-9_-]*"
+        }
+      ]
+    }
+  }
+}

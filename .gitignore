@@ -1,0 +1,7 @@
+/docs
+/dist
+/node_modules
+.env
+.DS_Store
+/installer_dist
+.sha256

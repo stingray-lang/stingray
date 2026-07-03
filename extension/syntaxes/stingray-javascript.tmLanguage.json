@@ -1,0 +1,190 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Stingray JavaScript",
+  "scopeName": "javascript.stingray",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#keywords" },
+    { "include": "#functions" },
+    { "include": "#operators" },
+    { "include": "#numbers" },
+    { "include": "#constants" },
+    { "include": "#variables" },
+    { "include": "#statements" },
+    { "include": "#expressions" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.js.stingray",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.js.stingray",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.js.stingray",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            { "include": "#string-interpolation" }
+          ]
+        },
+        {
+          "name": "string.quoted.single.js.stingray",
+          "begin": "'",
+          "end": "'"
+        },
+        {
+          "name": "string.template.js.stingray",
+          "begin": "`",
+          "end": "`",
+          "patterns": [
+            { "include": "#string-interpolation" }
+          ]
+        }
+      ]
+    },
+    "string-interpolation": {
+      "name": "meta.template.expression.js.stingray",
+      "begin": "\\$\\{",
+      "end": "\\}",
+      "patterns": [
+        { "include": "#expressions" }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.js.stingray",
+          "match": "\\b(if|else|for|while|do|switch|case|break|continue|return|try|catch|finally|throw|with|default|yield|of|in|instanceof|new|delete|typeof|void|debugger)\\b"
+        },
+        {
+          "name": "storage.type.function.js.stingray",
+          "match": "\\b(function)\\b"
+        },
+        {
+          "name": "storage.type.async.js.stingray",
+          "match": "\\b(async)\\b"
+        },
+        {
+          "name": "keyword.operator.await.js.stingray",
+          "match": "\\b(await)\\b"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.js.stingray",
+          "match": "\\b([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*(?=\\()"
+        },
+        {
+          "name": "support.function.js.stingray",
+          "match": "\\b(console|Math|Array|Object|String|Number|Boolean|Date|RegExp|Map|Set|Promise|JSON|Error|TypeError|RangeError|ReferenceError|SyntaxError|EvalError|URIError|parseInt|parseFloat|isNaN|isFinite|decodeURI|encodeURI|decodeURIComponent|encodeURIComponent|setTimeout|setInterval|clearTimeout|clearInterval|alert|confirm|prompt|fetch|require|module|exports|process|window|document|navigator|location|history|localStorage|sessionStorage|URL|URLSearchParams|Request|Response|Headers|FormData|Blob|File|FileReader|XMLHttpRequest|WebSocket|Event|CustomEvent|EventTarget|MutationObserver|IntersectionObserver|ResizeObserver|PerformanceObserver|AbortController|AbortSignal|TextEncoder|TextDecoder|CompressionStream|DecompressionStream|ReadableStream|WritableStream|TransformStream|BroadcastChannel|SharedWorker|Worker|WebAssembly)\\b"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.assignment.js.stingray",
+          "match": "(?:\\+=|-=|\\*=|/=|%=|\\*\\*=|\\*\\*=|\\*\\*=|\\*\\*=|\\?\\?=|&&=|\\|\\|=)"
+        },
+        {
+          "name": "keyword.operator.arithmetic.js.stingray",
+          "match": "(\\+|\\-|\\*|\\/|%|\\*\\*)"
+        },
+        {
+          "name": "keyword.operator.comparison.js.stingray",
+          "match": "(===|!==|==|!=|>=|<=|>|<|\\?\\?)"
+        },
+        {
+          "name": "keyword.operator.logical.js.stingray",
+          "match": "(&&|\\|\\||!|\\^|~)"
+        },
+        {
+          "name": "keyword.operator.ternary.js.stingray",
+          "match": "\\?(?!\\.)"
+        },
+        {
+          "name": "keyword.operator.optional.js.stingray",
+          "match": "\\?\\."
+        }
+      ]
+    },
+    "numbers": {
+      "name": "constant.numeric.js.stingray",
+      "match": "\\b(?:0[xX][0-9a-fA-F]+|0[oO][0-7]+|0[bB][01]+|\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)\\b"
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.js.stingray",
+          "match": "\\b(true|false|null|undefined|NaN|Infinity|-Infinity|undefined)\\b"
+        },
+        {
+          "name": "variable.language.js.stingray",
+          "match": "\\b(this|super|arguments|self|top|parent)\\b"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.js.stingray",
+          "match": "\\b([a-zA-Z_$][a-zA-Z0-9_$]*)\\b"
+        },
+        {
+          "name": "variable.parameter.js.stingray",
+          "match": "\\$([a-zA-Z_$][a-zA-Z0-9_$]*)"
+        }
+      ]
+    },
+    "statements": {
+      "patterns": [
+        {
+          "name": "meta.var.declaration.js.stingray",
+          "match": "\\b(const|let|var)\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)",
+          "captures": {
+            "1": { "name": "storage.type.js.stingray" },
+            "2": { "name": "variable.other.js.stingray" }
+          }
+        },
+        {
+          "name": "meta.function.declaration.js.stingray",
+          "match": "\\bfunction\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*\\(",
+          "captures": {
+            "1": { "name": "entity.name.function.js.stingray" }
+          }
+        },
+        {
+          "name": "meta.class.declaration.js.stingray",
+          "match": "\\bclass\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)",
+          "captures": {
+            "1": { "name": "entity.name.class.js.stingray" }
+          }
+        }
+      ]
+    },
+    "expressions": {
+      "patterns": [
+        { "include": "#comments" },
+        { "include": "#strings" },
+        { "include": "#numbers" },
+        { "include": "#constants" },
+        { "include": "#variables" },
+        { "include": "#functions" },
+        { "include": "#operators" }
+      ]
+    }
+  }
+}

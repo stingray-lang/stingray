@@ -1,0 +1,58 @@
+{
+  "name": "stingray-lang",
+  "version": "1.0.0",
+  "description": "Stingray - HTML + CSS + JS + React unified language. Extension: .stngr",
+  "main": "bin/stingray.js",
+  "bin": {
+    "stingray": "./bin/stingray.js",
+    "stngr": "./bin/stingray.js",
+    "sr": "./bin/stingray.js"
+  },
+  "scripts": {
+    "postinstall": "node bin/stingray.js --install"
+  },
+  "keywords": [
+    "stingray",
+    "stngr",
+    "html",
+    "css",
+    "javascript",
+    "react",
+    "compiler",
+    "material-design"
+  ],
+  "author": "Stingray Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stingray-lang/stingray"
+  },
+  "bugs": {
+    "url": "https://github.com/stingray-lang/stingray/issues"
+  },
+  "homepage": "https://stingray-lang.dev",
+  "files": [
+    "bin/",
+    "src/",
+    "dist/",
+    "extension/",
+    "Assets/",
+    "examples/",
+    "tests/",
+    "*.json",
+    "*.md"
+  ],
+  "dependencies": {
+    "acorn": "^8.14.0",
+    "terser": "^5.37.0",
+    "undici": "^7.8.0",
+    "@material/web": "^2.2.0"
+  },
+  "devDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

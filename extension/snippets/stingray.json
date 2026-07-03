@@ -1,0 +1,451 @@
+{
+  "Stingray": {
+    "Component": {
+      "prefix": "stng-comp",
+      "body": [
+        "component ${1:ComponentName} {",
+        "  state {",
+        "    ${2:count} = 0;",
+        "  }",
+        "",
+        "  template {",
+        "    <div class=\"${1/(.*)/${1:/downcase}/}\">",
+        "      <h1>${1}</h1>",
+        "      <p>${2:Description}</p>",
+        "    </div>",
+        "  }",
+        "",
+        "  script {",
+        "    ${0}",
+        "  }",
+        "",
+        "  style {",
+        "    .${1/(.*)/${1:/downcase}/} {",
+        "      padding: 20px;",
+        "    }",
+        "  }",
+        "}"
+      ],
+      "description": "Stingray Component"
+    },
+    "Page": {
+      "prefix": "stng-page",
+      "body": [
+        "page ${1:PageName} {",
+        "  template {",
+        "    <div class=\"page-${1/(.*)/${1:/downcase}/}\">",
+        "      <h1>${1}</h1>",
+        "      ${0}",
+        "    </div>",
+        "  }",
+        "",
+        "  script {",
+        "    console.log('${1} page loaded');",
+        "  }",
+        "}"
+      ],
+      "description": "Stingray Page"
+    },
+    "Hook": {
+      "prefix": "stng-hook",
+      "body": [
+        "hook use${1:HookName} {",
+        "  script {",
+        "    function use${1}(initialValue) {",
+        "      const [value, setValue] = useState(initialValue);",
+        "      ${0}",
+        "      return [value, setValue];",
+        "    }",
+        "    ",
+        "    export default use${1};",
+        "  }",
+        "}"
+      ],
+      "description": "Stingray Hook"
+    },
+    "Theme": {
+      "prefix": "stng-theme",
+      "body": [
+        "theme ${1:themeName} {",
+        "  style {",
+        "    :root {",
+        "      --primary-color: #0066cc;",
+        "      --secondary-color: #ff6b35;",
+        "      --surface-color: #ffffff;",
+        "      --background-color: #f5f5f5;",
+        "      --text-color: #000000;",
+        "      --font-family: system-ui, -apple-system, sans-serif;",
+        "    }",
+        "  }",
+        "}"
+      ],
+      "description": "Stingray Theme"
+    },
+    "Layout": {
+      "prefix": "stng-layout",
+      "body": [
+        "layout ${1:LayoutName} {",
+        "  template {",
+        "    <div class=\"layout-${1/(.*)/${1:/downcase}/}\">",
+        "      <header>",
+        "        <nav>",
+        "          <a href=\"/\">Home</a>",
+        "        </nav>",
+        "      </header>",
+        "      <main>{children}</main>",
+        "      <footer>",
+        "        <p>Footer</p>",
+        "      </footer>",
+        "    </div>",
+        "  }",
+        "}"
+      ],
+      "description": "Stingray Layout"
+    },
+    "Mixin": {
+      "prefix": "stng-mixin",
+      "body": [
+        "mixin ${1:MixinName} {",
+        "  script {",
+        "    const ${1} = {",
+        "      methods: {",
+        "        ${0}",
+        "      },",
+        "      computed: {}",
+        "    };",
+        "    ",
+        "    export default ${1};",
+        "  }",
+        "}"
+      ],
+      "description": "Stingray Mixin"
+    },
+    "Event": {
+      "prefix": "stng-event",
+      "body": [
+        "event ${1:eventName} {",
+        "  script {",
+        "    function on${1/(.*)/${1:/capitalize}/}(data) {",
+        "      console.log('${1} event fired:', data);",
+        "      ${0}",
+        "    }",
+        "    ",
+        "    export default on${1/(.*)/${1:/capitalize}/};",
+        "  }",
+        "}"
+      ],
+      "description": "Stingray Event"
+    },
+    "State": {
+      "prefix": "stng-state",
+      "body": [
+        "state {",
+        "  ${1:variableName} = ${0:value};",
+        "}"
+      ],
+      "description": "Stingray State Declaration"
+    },
+    "Effect": {
+      "prefix": "stng-effect",
+      "body": [
+        "effect {",
+        "  ${0:console.log('effect ran');}",
+        "}"
+      ],
+      "description": "Stingray Effect Block"
+    },
+    "Fragment": {
+      "prefix": "stng-frag",
+      "body": [
+        "fragment {",
+        "  ${0}",
+        "}"
+      ],
+      "description": "Stingray Fragment"
+    },
+    "Script": {
+      "prefix": "stng-script",
+      "body": [
+        "script {",
+        "  ${0}",
+        "}"
+      ],
+      "description": "Stingray Script Block"
+    },
+    "Style": {
+      "prefix": "stng-style",
+      "body": [
+        "style {",
+        "  .${1:className} {",
+        "    ${0}",
+        "  }",
+        "}"
+      ],
+      "description": "Stingray Style Block"
+    },
+    "Template": {
+      "prefix": "stng-tpl",
+      "body": [
+        "template {",
+        "  <div class=\"${1:container}\">",
+        "    ${0}",
+        "  </div>",
+        "}"
+      ],
+      "description": "Stingray Template Block"
+    },
+    "Import": {
+      "prefix": "stng-import",
+      "body": [
+        "import ${1:defaultImport} from '${2:module-path}';",
+        "${0}"
+      ],
+      "description": "Stingray Import Statement"
+    },
+    "Export": {
+      "prefix": "stng-export",
+      "body": [
+        "export default ${1:name};",
+        "${0}"
+      ],
+      "description": "Stingray Export Statement"
+    },
+    "Fetch": {
+      "prefix": "stng-fetch",
+      "body": [
+        "const response = await fetch('${1:url}', {",
+        "  method: '${2:GET}',",
+        "  headers: { 'Content-Type': 'application/json' },",
+        "  ${3:body: JSON.stringify(data)},",
+        "});",
+        "const data = await response.json();",
+        "${0}"
+      ],
+      "description": "Stingray Fetch Call"
+    },
+    "Material Button": {
+      "prefix": "stng-btn",
+      "body": [
+        "<mdc-button @click=\"${1:handler}\">${2:Label}</mdc-button>",
+        "${0}"
+      ],
+      "description": "Stingray Material Button"
+    },
+    "Material Card": {
+      "prefix": "stng-card",
+      "body": [
+        "<mdc-card>",
+        "  <h3>{${1:title}}</h3>",
+        "  <p>{${2:description}}</p>",
+        "  <mdc-button @click=\"${3:action}\">${4:Action}</mdc-button>",
+        "</mdc-card>",
+        "${0}"
+      ],
+      "description": "Stingray Material Card"
+    },
+    "Material TextField": {
+      "prefix": "stng-input",
+      "body": [
+        "<mdc-text-field label=\"${1:Label}\" id=\"${2:id}\" type=\"${3:text}\"></mdc-text-field>",
+        "${0}"
+      ],
+      "description": "Stingray Material TextField"
+    },
+    "Material Switch": {
+      "prefix": "stng-switch",
+      "body": [
+        "<mdc-switch @change=\"${1:handler}\">${2:Label}</mdc-switch>",
+        "${0}"
+      ],
+      "description": "Stingray Material Switch"
+    },
+    "Material Tabs": {
+      "prefix": "stng-tabs",
+      "body": [
+        "<mdc-tabs id=\"${1:tabs}\" @select=\"${2:handleSelect}\">",
+        "  <mdc-tab selected>${3:Tab 1}</mdc-tab>",
+        "  <mdc-tab>${4:Tab 2}</mdc-tab>",
+        "  <mdc-tab>${5:Tab 3}</mdc-tab>",
+        "</mdc-tabs>",
+        "${0}"
+      ],
+      "description": "Stingray Material Tabs"
+    },
+    "Material Dialog": {
+      "prefix": "stng-dialog",
+      "body": [
+        "<mdc-dialog id=\"${1:dialog}\" @open=\"${2:onOpen}\" @close=\"${3:onClose}\">",
+        "  <div slot=\"headline\">${4:Dialog Title}</div>",
+        "  <div slot=\"content\">${5:Dialog content goes here}</div>",
+        "  <div slot=\"actions\">",
+        "    <mdc-button @click=\"${6:close}\">${7:Cancel}</mdc-button>",
+        "    <mdc-button raised @click=\"${8:confirm}\">${9:Confirm}</mdc-button>",
+        "  </div>",
+        "</mdc-dialog>",
+        "${0}"
+      ],
+      "description": "Stingray Material Dialog"
+    },
+    "Material Progress": {
+      "prefix": "stng-progress",
+      "body": [
+        "<mdc-linear-progress indeterminate></mdc-linear-progress>",
+        "${0}"
+      ],
+      "description": "Stingray Material Linear Progress"
+    },
+    "Material Checkbox": {
+      "prefix": "stng-check",
+      "body": [
+        "<mdc-checkbox @change=\"${1:handler}\">${2:Label}</mdc-checkbox>",
+        "${0}"
+      ],
+      "description": "Stingray Material Checkbox"
+    },
+    "Material Slider": {
+      "prefix": "stng-slider",
+      "body": [
+        "<mdc-slider @input=\"${1:handleInput}\" min=\"${2:0}\" max=\"${3:100}\" value=\"${4:50}\"></mdc-slider>",
+        "${0}"
+      ],
+      "description": "Stingray Material Slider"
+    },
+    "Material Select": {
+      "prefix": "stng-select",
+      "body": [
+        "<mdc-select label=\"${1:Label}\" @change=\"${2:handleChange}\" id=\"${3:id}\">",
+        "  <mdc-list-item value=\"${4:option1}\">${5:Option 1}</mdc-list-item>",
+        "  <mdc-list-item value=\"${6:option2}\">${7:Option 2}</mdc-list-item>",
+        "  <mdc-list-item value=\"${8:option3}\">${9:Option 3}</mdc-list-item>",
+        "</mdc-select>",
+        "${0}"
+      ],
+      "description": "Stingray Material Select"
+    },
+    "Material Drawer": {
+      "prefix": "stng-drawer",
+      "body": [
+        "<mdc-drawer id=\"${1:drawer}\" ${2:modal} open>",
+        "  <mdc-list>",
+        "    <mdc-list-item selected>",
+        "      <span slot=\"text\">${3:Home}</span>",
+        "    </mdc-list-item>",
+        "    <mdc-list-item>",
+        "      <span slot=\"text\">${4:About}</span>",
+        "    </mdc-list-item>",
+        "  </mdc-list>",
+        "</mdc-drawer>",
+        "${0}"
+      ],
+      "description": "Stingray Material Drawer"
+    },
+    "Material Tooltip": {
+      "prefix": "stng-tooltip",
+      "body": [
+        "<mdc-tooltip id=\"${1:tooltip}\" text=\"${2:Tooltip text}\">",
+        "  <mdc-button @click=\"${3:handler}\">${4:Hover Me}</mdc-button>",
+        "</mdc-tooltip>",
+        "${0}"
+      ],
+      "description": "Stingray Material Tooltip"
+    },
+    "Material Top App Bar": {
+      "prefix": "stng-appbar",
+      "body": [
+        "<mdc-top-app-bar title=\"${1:Title}\">",
+        "  <mdc-icon-button icon=\"menu\" @click=\"${2:toggleDrawer}\"></mdc-icon-button>",
+        "  <mdc-icon-button icon=\"search\" @click=\"${3:handleSearch}\"></mdc-icon-button>",
+        "  <mdc-icon-button icon=\"more_vert\"></mdc-icon-button>",
+        "</mdc-top-app-bar>",
+        "${0}"
+      ],
+      "description": "Stingray Material Top App Bar"
+    },
+    "Material List": {
+      "prefix": "stng-list",
+      "body": [
+        "<mdc-list dense=\"${1:false}\" outlined=\"${2:true}\">",
+        "  <mdc-list-item two-line>",
+        "    <span slot=\"text\">",
+        "      <span>${3:Title}</span>",
+        "      <span>${4:Subtitle}</span>",
+        "    </span>",
+        "    <mdc-icon slot=\"graphic\">${5:star}</mdc-icon>",
+        "  </mdc-list-item>",
+        "${0}",
+        "</mdc-list>"
+      ],
+      "description": "Stingray Material List"
+    },
+    "Material Link": {
+      "prefix": "stng-link",
+      "body": [
+        "<mdc-link href=\"${1:#}\" target=\"${2:_self}\">${3:Link Text}</mdc-link>",
+        "${0}"
+      ],
+      "description": "Stingray Material Link"
+    },
+    "Material Radio": {
+      "prefix": "stng-radio",
+      "body": [
+        "<mdc-radio @change=\"${1:handler}\" name=\"${2:groupName}\" value=\"${3:value}\"></mdc-radio>",
+        "${0}"
+      ],
+      "description": "Stingray Material Radio"
+    },
+    "Material IconButton": {
+      "prefix": "stng-iconbtn",
+      "body": [
+        "<mdc-icon-button @click=\"${1:handler}\" icon=\"${2:favorite}\"></mdc-icon-button>",
+        "${0}"
+      ],
+      "description": "Stingray Material Icon Button"
+    },
+    "Material Menu": {
+      "prefix": "stng-menu",
+      "body": [
+        "<mdc-menu id=\"${1:menu}\" @select=\"${2:handleSelect}\">",
+        "  <mdc-list>",
+        "    <mdc-list-item>",
+        "      <span slot=\"text\">${3:Option 1}</span>",
+        "    </mdc-list-item>",
+        "    <mdc-list-item>",
+        "      <span slot=\"text\">${4:Option 2}</span>",
+        "    </mdc-list-item>",
+        "    <mdc-list-item disabled>",
+        "      <span slot=\"text\">${5:Disabled Option}</span>",
+        "    </mdc-list-item>",
+        "  </mdc-list>",
+        "</mdc-menu>",
+        "${0}"
+      ],
+      "description": "Stingray Material Menu"
+    },
+    "Material Snackbar": {
+      "prefix": "stng-snack",
+      "body": [
+        "<mdc-snackbar id=\"${1:snackbar}\" label-message=\"${2:Message}\" timeout-ms=\"${3:3000}\">",
+        "  <mdc-button slot=\"action\" @click=\"${4:handleAction}\">${5:Action}</mdc-button>",
+        "</mdc-snackbar>",
+        "${0}"
+      ],
+      "description": "Stingray Material Snackbar"
+    },
+    "Material Circular Progress": {
+      "prefix": "stng-circprog",
+      "body": [
+        "<mdc-circular-progress indeterminate></mdc-circular-progress>",
+        "${0}"
+      ],
+      "description": "Stingray Material Circular Progress"
+    },
+    "Material Toggle Button": {
+      "prefix": "stng-togglebtn",
+      "body": [
+        "<mdc-toggle-button @click=\"${1:handler}\" ${2:selected}>${3:Icon Label}</mdc-toggle-button>",
+        "${0}"
+      ],
+      "description": "Stingray Material Toggle Button"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Stingray HTML",
+  "scopeName": "html.stingray",
+  "patterns": [
+    { "include": "#tags" },
+    { "include": "#attributes" },
+    { "include": "#attribute-values" },
+    { "include": "#comments" },
+    { "include": "#interpolation" },
+    { "include": "#event-bindings" }
+  ],
+  "repository": {
+    "tags": {
+      "begin": "(<)([a-zA-Z][a-zA-Z0-9:-]*)(?=\\s|>)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.html.stingray" },
+        "2": { "name": "entity.name.tag.html.stingray" }
+      },
+      "end": "(>)",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.html.stingray" }
+      },
+      "patterns": [
+        { "include": "#attributes" }
+      ]
+    },
+    "closing-tags": {
+      "begin": "(</)([a-zA-Z][a-zA-Z0-9:-]*)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.html.stingray" },
+        "2": { "name": "entity.name.tag.html.stingray" }
+      },
+      "end": "(>)",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.html.stingray" }
+      }
+    },
+    "self-closing": {
+      "match": "<([a-zA-Z][a-zA-Z0-9:-]*)(?:\\s[^>]*)?\\s*/>",
+      "captures": {
+        "1": { "name": "entity.name.tag.html.stingray" }
+      }
+    },
+    "attributes": {
+      "patterns": [
+        {
+          "name": "entity.other.attribute-name.html.stingray",
+          "match": "[a-zA-Z:-]+"
+        },
+        {
+          "name": "keyword.operator.attribute-equals.html.stingray",
+          "match": "="
+        }
+      ]
+    },
+    "attribute-values": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.html.stingray",
+          "match": "\"[^\"]*\""
+        },
+        {
+          "name": "string.quoted.single.html.stingray",
+          "match": "'[^']*'"
+        }
+      ]
+    },
+    "comments": {
+      "name": "comment.block.html.stingray",
+      "begin": "<!--",
+      "end": "-->"
+    },
+    "interpolation": {
+      "name": "string.interpolated.stingray",
+      "begin": "\\{",
+      "end": "\\}",
+      "patterns": [
+        { "include": "source.js" }
+      ]
+    },
+    "event-bindings": {
+      "name": "meta.event-binding.stingray",
+      "match": "@(click|change|input|submit|keydown|keyup|keypress|mouseover|mouseout|mouseenter|mouseleave|focus|blur|dblclick|contextmenu|scroll|resize|load|error|drag|drop|touchstart|touchend|touchmove|wheel|copy|paste|cut|animationend|transitionend|pointerdown|pointerup|pointermove|pointerover|pointerout|pointerenter|pointerleave|beforeinput|search|toggle|select|invalid|reset|autocomplete|autocompleteoff|autocompleteon|beforeunload|hashchange|languagechange|message|offline|online|popstate|storage|unload|abort|animationstart|auxclick|cancel|canplay|canplaythrough|cuechange|durationchange|emptied|ended|formdata|gotpointercapture|lostpointercapture|pause|play|playing|progress|ratechange|seeked|seeking|stalled|suspend|timeupdate|volumechange|waiting|webkitanimationend|webkitanimationiteration|webkitanimationstart|webkittransitionend)\\s*=\\s*\"[^\"]*\"",
+      "captures": {
+        "1": { "name": "keyword.event.stingray" }
+      }
+    }
+  }
+}

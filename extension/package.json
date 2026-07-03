@@ -1,0 +1,218 @@
+{
+  "name": "stingray",
+  "displayName": "Stingray Language Support",
+  "description": "Full syntax highlighting, IntelliSense, and error reporting for Stingray (.stngr) files. Fuses HTML, CSS, JS, and React syntax support.",
+  "version": "1.0.0",
+  "publisher": "stingray-lang",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Linters",
+    "Snippets"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "stingray",
+        "aliases": ["Stingray", "stingray"],
+        "extensions": [".stngr"],
+        "icon": {
+          "light": "./assets/logo.png",
+          "dark": "./assets/logo.png"
+        },
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "stingray",
+        "scopeName": "source.stingray",
+        "path": "./syntaxes/stingray.tmLanguage.json",
+        "injectTo": ["source.stingray"]
+      },
+      {
+        "language": "stingray-html",
+        "scopeName": "html.stingray",
+        "path": "./syntaxes/stingray-html.tmLanguage.json",
+        "injectTo": ["source.stingray"]
+      },
+      {
+        "language": "stingray-css",
+        "scopeName": "css.stingray",
+        "path": "./syntaxes/stingray-css.tmLanguage.json",
+        "injectTo": ["source.stingray"]
+      },
+      {
+        "language": "stingray-javascript",
+        "scopeName": "javascript.stingray",
+        "path": "./syntaxes/stingray-javascript.tmLanguage.json",
+        "injectTo": ["source.stingray"]
+      },
+      {
+        "language": "stingray-react",
+        "scopeName": "javascriptreact.stingray",
+        "path": "./syntaxes/stingray-react.tmLanguage.json",
+        "injectTo": ["source.stingray"]
+      }
+    ],
+    "snippets": [
+      {
+        "language": "stingray",
+        "path": "./snippets/stingray.json"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "stingray.compile",
+        "key": "ctrl+shift+b",
+        "when": "editorTextFocus && editorLangId == stingray"
+      },
+      {
+        "command": "stingray.format",
+        "key": "shift+alt+f",
+        "when": "editorTextFocus && editorLangId == stingray"
+      }
+    ],
+    "commands": [
+      {
+        "command": "stingray.compile",
+        "title": "Stingray: Compile Current File",
+        "category": "Stingray"
+      },
+      {
+        "command": "stingray.build",
+        "title": "Stingray: Build Project",
+        "category": "Stingray"
+      },
+      {
+        "command": "stingray.dev-server",
+        "title": "Stingray: Start Dev Server",
+        "category": "Stingray"
+      },
+      {
+        "command": "stingray.new-component",
+        "title": "Stingray: New Component",
+        "category": "Stingray"
+      },
+      {
+        "command": "stingray.new-page",
+        "title": "Stingray: New Page",
+        "category": "Stingray"
+      },
+      {
+        "command": "stingray.new-hook",
+        "title": "Stingray: New Hook",
+        "category": "Stingray"
+      },
+      {
+        "command": "stingray.validate",
+        "title": "Stingray: Validate File",
+        "category": "Stingray"
+      },
+      {
+        "command": "stingray.show-errors",
+        "title": "Stingray: Show Error Log",
+        "category": "Stingray"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "stingray.compile",
+          "when": "editorLangId == stingray",
+          "group": "Stingray"
+        },
+        {
+          "command": "stingray.validate",
+          "when": "editorLangId == stingray",
+          "group": "Stingray"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "stingray.new-component",
+          "when": "view == stingray.explorer",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Stingray",
+      "properties": {
+        "stingray.enableSyntaxHighlighting": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable syntax highlighting for embedded HTML, CSS, JS in .stngr files"
+        },
+        "stingray.autoCompile": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto-compile on save"
+        },
+        "stingray.showErrors": {
+          "type": "string",
+          "default": "detailed",
+          "enum": ["simple", "detailed", "verbose"],
+          "description": "Error display detail level"
+        },
+        "stingray.materialWebComponents": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Material Web component snippets and IntelliSense"
+        },
+        "stingray.reactSupport": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable React JSX syntax support"
+        },
+        "stingray.lintOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run linter on file save"
+        },
+        "stingray.defaultPort": {
+          "type": "number",
+          "default": 8080,
+          "description": "Default port for dev server"
+        }
+      }
+    },
+    "problemMatchers": [
+      {
+        "name": "stingray",
+        "owner": "stingray",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^WUT\\?:\\s+(.+)$",
+          "severity": 1,
+          "message": 2
+        }
+      }
+    ]
+  },
+  "activationEvents": [
+    "onLanguage:stingray",
+    "onCommand:stingray.compile",
+    "onCommand:stingray.build",
+    "onCommand:stingray.dev-server",
+    "onCommand:stingray.new-component",
+    "onCommand:stingray.new-page",
+    "onCommand:stingray.new-hook",
+    "onCommand:stingray.validate",
+    "onCommand:stingray.show-errors"
+  ],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run package-extension",
+    "compile-extension": "tsc",
+    "watch-extension": "tsc --watch",
+    "package-extension": "tsc"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.11.0"
+  }
+}

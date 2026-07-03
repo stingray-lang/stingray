@@ -1,0 +1,40 @@
+{
+  "name": "stingray-lang",
+  "stingray": true,
+  "version": "1.0.0",
+  "language": "stingray",
+  "runtime": "browser-node-hybrid",
+  "target": ["web", "desktop", "mobile"],
+  "compiler": {
+    "transpile": true,
+    "optimize": true,
+    "minify": true,
+    "sourcemap": true,
+    "treeShaking": true,
+    "codeSplitting": true
+  },
+  "features": {
+    "html": true,
+    "css": true,
+    "javascript": true,
+    "react": true,
+    "materialWeb": true,
+    "fetch": true,
+    "filesystem": true,
+    "process": true,
+    "asyncAwait": true,
+    "decorators": true,
+    "patternMatching": true,
+    "modules": true
+  },
+  "output": {
+    "format": "esm",
+    "targetEnv": "auto",
+    "polyfills": true
+  },
+  "components": {
+    "library": "material-web",
+    "custom": true,
+    "theme": "default"
+  }
+}

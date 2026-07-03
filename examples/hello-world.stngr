@@ -1,0 +1,43 @@
+// Stingray Simple Example
+// Basic demonstration of Stingray syntax
+
+component HelloWorld {
+  state {
+    name = "World";
+    clicked = false;
+  }
+
+  template {
+    <div class="hello-world">
+      <h1>Hello, {name}!</h1>
+      <mdc-button @click="sayHello">
+        {clicked ? 'Hello Again!' : 'Say Hello'}
+      </mdc-button>
+      <mdc-text-field label="Enter your name" id="nameInput"></mdc-text-field>
+      <mdc-switch @change="toggleClicked">{clicked ? 'On' : 'Off'}</mdc-switch>
+    </div>
+  }
+
+  script {
+    function sayHello() {
+      clicked = !clicked;
+      const input = document.getElementById('nameInput');
+      if (input) {
+        name = input.value || "World";
+      }
+    }
+  }
+
+  style {
+    .hello-world {
+      text-align: center;
+      padding: 40px;
+    }
+    
+    h1 {
+      color: var(--mdc-theme-primary);
+    }
+  }
+}
+
+export default HelloWorld;

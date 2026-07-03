@@ -1,0 +1,271 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Stingray",
+  "scopeName": "source.stingray",
+  "patterns": [
+    { "include": "#import-statement" },
+    { "include": "#export-statement" },
+    { "include": "#component-declaration" },
+    { "include": "#page-declaration" },
+    { "include": "#layout-declaration" },
+    { "include": "#style-block" },
+    { "include": "#script-block" },
+    { "include": "#template-block" },
+    { "include": "#state-block" },
+    { "include": "#effect-block" },
+    { "include": "#hook-block" },
+    { "include": "#event-block" },
+    { "include": "#mixin-block" },
+    { "include": "#theme-block" },
+    { "include": "#fragment-block" },
+    { "include": "#comment" },
+    { "include": "#string" },
+    { "include": "#keyword" },
+    { "include": "#expression" }
+  ],
+  "repository": {
+    "import-statement": {
+      "name": "meta.import.stingray",
+      "begin": "^\\s*import\\s+",
+      "end": ";?$",
+      "patterns": [
+        { "include": "#string" },
+        { "include": "#js-keywords" }
+      ]
+    },
+    "export-statement": {
+      "name": "meta.export.stingray",
+      "begin": "^\\s*export\\s+",
+      "end": ";?$",
+      "patterns": [
+        { "include": "#string" },
+        { "include": "#js-keywords" }
+      ]
+    },
+    "component-declaration": {
+      "name": "meta.component.stingray",
+      "begin": "^\\s*(component)\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*(extends\\s+[a-zA-Z_$][a-zA-Z0-9_$]*)?\\s*\\{?",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.stingray" },
+        "2": { "name": "entity.name.function.component.stingray" },
+        "3": { "name": "storage.type.extends.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "#nested-braces" },
+        { "include": "#block-content" }
+      ]
+    },
+    "page-declaration": {
+      "name": "meta.page.stingray",
+      "begin": "^\\s*(page)\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*\\{?",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.stingray" },
+        "2": { "name": "entity.name.function.page.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "#nested-braces" },
+        { "include": "#block-content" }
+      ]
+    },
+    "layout-declaration": {
+      "name": "meta.layout.stingray",
+      "begin": "^\\s*(layout)\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*\\{?",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.stingray" },
+        "2": { "name": "entity.name.function.layout.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "#nested-braces" },
+        { "include": "#block-content" }
+      ]
+    },
+    "style-block": {
+      "name": "meta.style.stingray",
+      "begin": "^\\s*style\\s+(global\\s+)?\\{?",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.stingray" },
+        "2": { "name": "storage.modifier.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "source.css" }
+      ]
+    },
+    "script-block": {
+      "name": "meta.script.stingray",
+      "begin": "^\\s*script\\s+(module\\s+)?\\{?",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.stingray" },
+        "2": { "name": "storage.modifier.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "source.js" }
+      ]
+    },
+    "template-block": {
+      "name": "meta.template.stingray",
+      "begin": "^\\s*template\\s*\\{?",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "text.html.basic" }
+      ]
+    },
+    "state-block": {
+      "name": "meta.state.stingray",
+      "begin": "^\\s*state\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*[:=]",
+      "beginCaptures": {
+        "1": { "name": "variable.other.stingray" }
+      },
+      "end": ";?$",
+      "patterns": [
+        { "include": "#js-expressions" }
+      ]
+    },
+    "effect-block": {
+      "name": "meta.effect.stingray",
+      "begin": "^\\s*effect\\s*\\{?",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "source.js" }
+      ]
+    },
+    "hook-block": {
+      "name": "meta.hook.stingray",
+      "begin": "^\\s*hook\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*\\{?",
+      "beginCaptures": {
+        "1": { "name": "entity.name.function.hook.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "source.js" }
+      ]
+    },
+    "event-block": {
+      "name": "meta.event.stingray",
+      "begin": "^\\s*event\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*\\{?",
+      "beginCaptures": {
+        "1": { "name": "entity.name.function.event.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "source.js" }
+      ]
+    },
+    "mixin-block": {
+      "name": "meta.mixin.stingray",
+      "begin": "^\\s*mixin\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*\\{?",
+      "beginCaptures": {
+        "1": { "name": "entity.name.class.mixin.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "source.js" }
+      ]
+    },
+    "theme-block": {
+      "name": "meta.theme.stingray",
+      "begin": "^\\s*theme\\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\\s*\\{?",
+      "beginCaptures": {
+        "1": { "name": "entity.name.class.theme.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "source.css" }
+      ]
+    },
+    "fragment-block": {
+      "name": "meta.fragment.stingray",
+      "begin": "^\\s*fragment\\s*\\{?",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.stingray" }
+      },
+      "end": "^\\s*\\}",
+      "patterns": [
+        { "include": "text.html.basic" }
+      ]
+    },
+    "comment": {
+      "name": "comment.line.double-slash.stingray",
+      "match": "//.*$"
+    },
+    "string": {
+      "name": "string.quoted.double.stingray",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        { "include": "#string-interpolation" }
+      ]
+    },
+    "string-interpolation": {
+      "name": "string.interpolated.js.stingray",
+      "begin": "\\{",
+      "end": "\\}",
+      "patterns": [
+        { "include": "source.js" }
+      ]
+    },
+    "keyword": {
+      "patterns": [
+        {
+          "name": "keyword.control.stingray",
+          "match": "\\b(component|page|layout|style|script|template|state|effect|hook|event|mixin|theme|fragment)\\b"
+        },
+        {
+          "name": "keyword.control.stingray",
+          "match": "\\b(import|export|from|default|extends)\\b"
+        }
+      ]
+    },
+    "expression": {
+      "name": "meta.expression.stingray",
+      "match": "(?:const|let|var|function|class|return|await|async|if|else|for|while|switch|case|try|catch|finally|throw)\\b"
+    },
+    "nested-braces": {
+      "name": "meta.block.stingray",
+      "begin": "\\{",
+      "end": "\\}",
+      "patterns": [
+        { "include": "#nested-braces" },
+        { "include": "source.js" }
+      ]
+    },
+    "block-content": {
+      "patterns": [
+        { "include": "#comment" },
+        { "include": "#string" },
+        { "include": "#keyword" },
+        { "include": "#state-block" },
+        { "include": "#effect-block" },
+        { "include": "#style-block" },
+        { "include": "#script-block" },
+        { "include": "#template-block" }
+      ]
+    },
+    "js-keywords": {
+      "patterns": [
+        { "name": "keyword.control.js", "match": "\\b(if|else|for|while|return|function|class|const|let|var)\\b" },
+        { "name": "storage.type.js", "match": "\\b(function|class|const|let|var|async|await)\\b" },
+        { "name": "constant.language.js", "match": "\\b(true|false|null|undefined|NaN|Infinity)\\b" },
+        { "name": "keyword.operator.js", "match": "\\b(=|===|!==|&&|\\|\\||!|\\+|-|\\*|\\/|%|>|<|>=|<=)\\b" }
+      ]
+    },
+    "js-expressions": {
+      "patterns": [
+        { "name": "variable.other.stingray", "match": "\\b[a-zA-Z_$][a-zA-Z0-9_$]*\\b" },
+        { "name": "constant.numeric.stingray", "match": "\\b\\d+(\\.\\d+)?\\b" },
+        { "name": "string.quoted.single.stingray", "match": "'[^']*'" },
+        { "name": "keyword.operator.js", "match": "[:=]" }
+      ]
+    }
+  }
+}

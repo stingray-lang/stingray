@@ -1,0 +1,18 @@
+{
+  "colors": {
+    "stingray.primary": "#0066cc",
+    "stingray.secondary": "#ff6b35",
+    "stingray.background": "#f5f5f5",
+    "stingray.surface": "#ffffff",
+    "stingray.error": "#b00020",
+    "stingray.warning": "#ff9800",
+    "stingray.success": "#4caf50",
+    "stingray.info": "#2196f3"
+  },
+  "fileIcons": {
+    "stingray": {
+      "icon": "logo",
+      "formats": ["stngr"]
+    }
+  }
+}
