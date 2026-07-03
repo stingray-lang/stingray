@@ -69,6 +69,7 @@ class StingrayCLI {
       'info': this.info.bind(this),
       'version': this.version.bind(this),
       'help': this.help.bind(this),
+      'example': this.example.bind(this),
       'deploy': this.deploy.bind(this),
       'preview': this.preview.bind(this)
     };
@@ -84,7 +85,7 @@ class StingrayCLI {
     }
 
     // Single-letter shortcuts
-    const shortcuts = { 'i': 'init', 'b': 'build', 'c': 'compile', 't': 'transpile', 'd': 'dev', 's': 'serve', 'r': 'run', 'n': 'new', 'v': 'version', 'h': 'help', '-h': 'help', '--h': 'help', '-v': 'version', '--v': 'version' };
+    const shortcuts = { 'i': 'init', 'b': 'build', 'c': 'compile', 't': 'transpile', 'd': 'dev', 's': 'serve', 'r': 'run', 'n': 'new', 'v': 'version', 'h': 'help', 'e': 'example', '-h': 'help', '--h': 'help', '-v': 'version', '--v': 'version' };
     if (shortcuts[command]) {
       args[0] = shortcuts[command];
     }
@@ -500,6 +501,107 @@ class StingrayCLI {
     const compiler = new StingrayCompiler({ minify: false, react: true, materialWeb: true });
     const result = await compiler.compileProject(entry, './dist/transpiled');
     if (result.success) console.log(`  ✅ Transpiled to ./dist/transpiled/\n`);
+  }
+
+  showHelp() {
+    console.log(`
+\x1b[1m\x1b[36m  ╔══════════════════════════════════════════════════════╗\x1b[0m
+\x1b[1m\x1b[36m  ║             🐟 STINGRAY LANGUAGE CLI              ║\x1b[0m
+\x1b[1m\x1b[36m  ╚══════════════════════════════════════════════════════╝\x1b[0m
+
+\x1b[33m  USAGE\x1b[0m
+    stingray <command> [options]
+
+\x1b[33m  COMMANDS\x1b[0m
+    init <name>         Create new Stingray project
+    build [src] [out]   Build project for production
+    compile <file>      Compile single .stngr file
+    dev [src]           Start dev server with hot reload
+    serve [dir]         Serve static files
+    run <file>          Compile and execute .stngr file
+    new <type> <name>   Create component/page/hook
+    test [dir]          Run test files
+    lint [dir]          Lint .stngr files
+    transpile [src]     Transpile to React/JSX
+    example             Show code snippets and compilation guide
+    help                Show this help message
+
+\x1b[33m  SHORTCUTS\x1b[0m
+    sr          → stingray
+    stingray build → npm run build
+
+\x1b[33m  EXAMPLES\x1b[0m
+    stingray init my-app     # Create project
+    cd my-app
+    stingray dev             # Start dev server (localhost:8080)
+    stingray build           # Build for production
+    stingray run app.stngr   # Run single file
+
+\x1b[33m  DOCS\x1b[0m
+    https://stingray-lang.github.io/stingray
+`);
+  }
+
+  async help(args) {
+    this.showHelp();
+  }
+
+  async example(args) {
+    console.log(`
+\x1b[1m\x1b[36m  ╔══════════════════════════════════════════════════════╗\x1b[0m
+\x1b[1m\x1b[36m  ║        STINGRAY CODE SNIPPETS & GUIDE              ║\x1b[0m
+\x1b[1m\x1b[36m  ╚══════════════════════════════════════════════════════╝\x1b[0m
+
+\x1b[32m  #1: Hello World\x1b[0m
+component App {
+  state { name = "World"; }
+  template { <h1>Hello {name}!</h1> }
+  style { h1 { color: blue; } }
+}
+
+\x1b[32m  #2: Counter with React State\x1b[0m
+component Counter {
+  state { count = 0; }
+  template { 
+    <div>
+      <p>Count: {count}</p>
+      <button @click="increment">+</button>
+    </div>
+  }
+  script { function increment() { count++; } }
+}
+
+\x1b[32m  #3: Fetch API\x1b[0m
+component DataList {
+  state { items = []; }
+  template { <ul>#for item in items <li>{item}</li> #endfor</ul> }
+  script {
+    async function load() {
+      const res = await fetch('/api/data');
+      items = await res.json();
+    }
+  }
+}
+
+\x1b[32m  #4: Material Web Component\x1b[0m
+component Form {
+  template {
+    <mdc-text-field label="Email" type="email"></mdc-text-field>
+    <mdc-button raised>Submit</mdc-button>
+  }
+  style { .form { display: flex; gap: 12px; } }
+}
+
+\x1b[33m  COMPILATION GUIDE\x1b[0m
+  stingray compile file.stngr     → Compiles to HTML/JS/CSS
+  stingray build                  → Production build (minified)
+  stingray run file.stngr         → Compile and execute JS
+
+\x1b[33m  OUTPUT FILES\x1b[0m
+  .html  → Standalone HTML with embedded styles
+  .js    → JavaScript module
+  .css   → Extracted CSS (optional)
+`);
   }
 }
 

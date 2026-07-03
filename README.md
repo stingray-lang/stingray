@@ -1,64 +1,64 @@
 # 🐟 Stingray - HTML + CSS + JS + React in ONE file
 
-**Un lenguaje donde todo va junto.** Escribes `.stngr`, obtienes la web.
+**A language where everything goes together.** Write `.stngr`, get the web.
 
-## Lo más fácil que usarás
-
-```bash
-stingray init mi-app     # Crea todo el proyecto
-cd mi-app
-stingray dev             # Arranca servidor (abre navegador automático)
-```
-
-**¿Tienes un archivo `.stngr`?** Solo pasalo directo:
+## The Easiest Thing You'll Use
 
 ```bash
-stingray app.stngr       # Se compila y abre automáticamente
+stingray init my-app     # Creates the entire project
+cd my-app
+stingray dev             # Starts dev server (auto-opens browser)
 ```
 
-## Comandos que importan
+**Have a `.stngr` file?** Just pass it directly:
 
-| Comando | Qué hace |
+```bash
+stingray app.stngr       # Compiles and opens automatically
+```
+
+## Commands That Matter
+
+| Command | What it does |
 |---------|----------|
-| `stingray init <nombre>` | Crea proyecto listo para usar |
-| `stingray dev` | Servidor dev con hot reload + abre navegador |
-| `stingray build` | Compila para producción |
-| `stingray compile x.stngr` | Compila un archivo |
-| `stingray run x.stngr` | Compila y ejecuta |
-| `stingray new component MiBoton` | Crea un componente |
-| `stingray new page Inicio` | Crea una página |
-| `stingray serve` | Sirve archivos estáticos |
+| `stingray init <name>` | Creates a ready-to-use project |
+| `stingray dev` | Dev server with hot reload + opens browser |
+| `stingray build` | Compiles for production |
+| `stingray compile x.stngr` | Compiles a file |
+| `stingray run x.stngr` | Compiles and executes |
+| `stingray new component MyButton` | Creates a component |
+| `stingray new page Home` | Creates a page |
+| `stingray serve` | Serves static files |
 
-## Atajos
+## Shortcuts
 
 ```bash
-sr init mi-app        → stingray init mi-app
+sr init my-app        → stingray init my-app
 stngr dev             → stingray dev
 sb                    → stingray build
-stingray app.stngr    → auto-compila y abre
+stingray app.stngr    → auto-compiles and opens
 ```
 
-## ¿Qué es un archivo `.stngr`?
+## What is a `.stngr` file?
 
-Todo en uno. HTML, CSS, JS y React en un solo archivo legible:
+Everything in one. HTML, CSS, JS, and React in a single readable file:
 
 ```stingray
-component Contador {
+component Counter {
   state {
     count = 0;
   }
 
   template {
     <div class="app">
-      <h1>Contador: {count}</h1>
-      <mdc-button @click="sumar">+ Sumar</mdc-button>
-      <mdc-button @click="restar">- Restar</mdc-button>
+      <h1>Counter: {count}</h1>
+      <mdc-button @click="increment">+ Add</mdc-button>
+      <mdc-button @click="decrement">- Subtract</mdc-button>
     </div>
   }
 
   script {
-    function sumar() { count++; }
-    function restar() { count--; }
+    function increment() { count++; }
+    function decrement() { count--; }
   }
 
   style {
@@ -68,69 +68,69 @@ component Contador {
 }
 ```
 
-## Instalación
+## Installation
 
-### Opción 1: Instalador automático (recomendado)
+### Option 1: Automatic Installer (recommended)
 
 ```bash
-# Instala todo: dependencias, PATH, asociaciones de archivos, VS Code
+# Installs everything: dependencies, PATH, file associations, VS Code
 stingray --install
 
-# O con npm global
+# Or with global npm
 npm install -g stingray-lang
 ```
 
-### Opción 2: Instalador standalone (.exe)
+### Option 2: Standalone Installer (.exe)
 
 ```bash
-# Genera el instalador
+# Generate the installer
 node bin/installer.js
 
-# Para crear .exe real necesitas:
+# To create real .exe you need:
 # Inno Setup: "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" Stingray.iss
 # NSIS: makensis Stingray.nsi
 ```
 
-Genera:
-- `Stingray.iss` → Inno Setup (compila a .exe)
-- `Stingray.nsi` → NSIS (compila a .exe)
-- `Stingray-Installer.bat` → Auto-instalador sin dependencias
-- `installer-dist/portable/` → Paquete portable (ZIP)
+Generates:
+- `Stingray.iss` → Inno Setup (compiles to .exe)
+- `Stingray.nsi` → NSIS (compiles to .exe)
+- `Stingray-Installer.bat` → Self-installer without dependencies
+- `installer-dist/portable/` → Portable package (ZIP)
 
-### Opción 3: Portable (sin instalación)
+### Option 3: Portable (no install)
 
 ```bash
 node bin/installer.js portable
-# Usa: installer-dist/portable/start.bat
+# Use: installer-dist/portable/start.bat
 ```
 
-### Opción 4: Desde npm
+### Option 4: From npm
 
 ```bash
 npm install -g stingray-lang
 ```
 
-## Integración con el sistema
+## System Integration
 
 ### Windows
-- **Asociación de archivos**: doble clic en `.stngr` compila
-- **Menú contextual** (clic derecho): Compile, Dev Server, Build
-- **Arrastrar y soltar**: arrastra `.stngr` al terminal
-- **Scripts rápidos**: `stingray-dev.bat`, `stingray-build.bat`, etc.
-- **PATH automático**: `stingray` disponible desde cualquier carpeta
-- **Variables de entorno**: `STINGRAY_HOME` configurado
+- **File association**: double-click `.stngr` to compile
+- **Context menu** (right-click): Compile, Dev Server, Build
+- **Drag and drop**: drag `.stngr` to terminal
+- **Quick scripts**: `stingray-dev.bat`, `stingray-build.bat`, etc.
+- **Auto PATH**: `stingray` available from any folder
+- **Environment variables**: `STINGRAY_HOME` configured
 
 ### VS Code
-- **Instalación automática** con `stingray --install`
-- **Syntax highlighting** para HTML, CSS, JS dentro de `.stngr`
-- **40+ snippets** (escribe `stng-btn` + Tab)
-- **Errores WUT?** con stack trace completo
-- **Autocompletado** para componentes Material Web
-- **Validación en tiempo real** al guardar
+- **Auto installation** with `stingray --install`
+- **Syntax highlighting** for HTML, CSS, JS inside `.stngr`
+- **40+ snippets** (type `stng-btn` + Tab)
+- **WUT? Errors** with full stack trace
+- **Autocompletion** for Material Web components
+- **Real-time validation** on save
 
-### Errores "WUT?"
+### WUT? Errors
 
-Cuando algo falla, ves exactamente qué:
+When something fails, you see exactly what:
 
 ```
 ╔══════════════════════════════════════════════════════╗
@@ -153,51 +153,51 @@ Cuando algo falla, ves exactamente qué:
       16:
 ```
 
-## Extensiones de archivo
+## File Extensions
 
-- **`.stngr`** - Archivo Stingray principal
+- **`.stngr`** - Stingray source file
 - **Logo**: `Assets/logo.png`
 
-## Compatible con la web
+## Web Compatible
 
-Stingray se compila a HTML/CSS/JS puro. Todo lo que funciona en la web, funciona con Stingray:
+Stingray compiles to plain HTML/CSS/JS. Everything that works on the web, works with Stingray:
 
-- Libraries npm
-- APIs del navegador (fetch, localStorage, etc.)
-- Frameworks React/Vue/Angular
-- Cualquier CDN
+- npm libraries
+- Browser APIs (fetch, localStorage, etc.)
+- React/Vue/Angular frameworks
+- Any CDN
 
-## Estructura de un proyecto
+## Project Structure
 
 ```
-mi-app/
+my-app/
 ├── src/
-│   ├── components/    ← Tus componentes (.stngr)
-│   ├── pages/         ← Páginas (.stngr)
-│   ├── hooks/         ← Hooks personalizados
-│   └── styles/        ← Temas y estilos
-├── public/            ← Archivos estáticos
-├── stingray.json      ← Configuración
-└── package.json       ← Paquetes npm
+│   ├── components/    ← Your components (.stngr)
+│   ├── pages/         ← Pages (.stngr)
+│   ├── hooks/         ← Custom hooks
+│   └── styles/        ← Themes and styles
+├── public/            ← Static files
+├── stingray.json      ← Configuration
+└── package.json       ← npm packages
 ```
 
-## Generar instaladores
+## Generate Installers
 
 ```bash
-# Generar TODO (Inno Setup + NSIS + Auto-instalador + Portable)
+# Generate ALL (Inno Setup + NSIS + Self-installer + Portable)
 node bin/installer.js
 
-# Generar solo un tipo
-node bin/installer.js npm          # Solo paquete npm
-node bin/installer.js inno         # Solo Inno Setup
-node bin/installer.js nsis         # Solo NSIS
-node bin/installer.js self         # Solo auto-instalador
-node bin/installer.js portable     # Solo portable
+# Generate single type
+node bin/installer.js npm          # npm package only
+node bin/installer.js inno         # Inno Setup only
+node bin/installer.js nsis         # NSIS only
+node bin/installer.js self         # Self-installer only
+node bin/installer.js portable     # Portable only
 
-# Ayuda
+# Help
 node bin/installer.js --help
 ```
 
-## Licencia
+## License
 
 MIT

@@ -9,7 +9,7 @@
   <meta property="og:description" content="Stingray is a high-level programming language that fuses HTML, CSS, JavaScript, and React into a single .stngr file.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stingray-lang.github.io/stingray">
-  <link rel="icon" href="Assets/logo.png" type="image/png">
+  <link rel="icon" href="/Assets/logo.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -427,7 +427,7 @@
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <img src="Assets/logo.png" alt="">
+      <img src="/Assets/logo.png" alt="">
       <span>stingray</span>
     </a>
     <div class="nav-links">
@@ -737,10 +737,15 @@ $ stingray dev</code>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <p><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;">eco</span> Stingray Language v1.0.0 — <code>.stngr</code> — MIT License</p>
-  <p style="margin-top: 8px;"><a href="https://github.com/stingray-lang/stingray">GitHub</a> · <a href="https://www.npmjs.com/package/stingray-lang">npm</a> · <a href="https://github.com/stingray-lang/stingray/issues">Issues</a></p>
-</footer>
+<footer style="display:flex;align-items:center;justify-content:center;gap:8px;">
+   <img src="/Assets/logo.png" alt="Stingray" style="width:16px;height:16px;border-radius:2px;">
+   <span>Stingray Language v1.0.0 — <code>.stngr</code> — MIT License</span>
+   <span style="margin-left:16px;color:var(--muted);font-size:12px;">
+     <a href="https://github.com/stingray-lang/stingray" style="color:inherit;text-decoration:none;">GitHub</a> · 
+     <a href="https://www.npmjs.com/package/stingray-lang" style="color:inherit;text-decoration:none;">npm</a> · 
+     <a href="https://github.com/stingray-lang/stingray/issues" style="color:inherit;text-decoration:none;">Issues</a>
+   </span>
+ </footer>
 
 </body>
 </html>
