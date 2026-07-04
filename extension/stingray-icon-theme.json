@@ -1,7 +1,7 @@
 {
   "fileTypes": ["stngr"],
   "icon": {
-    "light": "..Assets/logo.png",
-    "dark": "..Assets/logo.png"
+    "light": "..https://stingray-lang.github.io/stingray/Assets/logo.png",
+    "dark": "..https://stingray-lang.github.io/stingray/Assets/logo.png"
   }
 }

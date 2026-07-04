@@ -156,7 +156,7 @@ When something fails, you see exactly what:
 ## File Extensions
 
 - **`.stngr`** - Stingray source file
-- **Logo**: `Assets/logo.png`
+- **Logo**: `https://stingray-lang.github.io/stingray/Assets/logo.png`
 
 ## Web Compatible
 
