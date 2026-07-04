@@ -47,7 +47,7 @@ function prepareDist() {
     'bin/stingray-build.bat', 'bin/stingray-run.bat',
     'bin/stingray-serve.bat', 'bin/stingray-open.bat',
     'package.json', 'stingray.json',
-    'Assets/logo.ico'
+    'Assets/logo.png'
   ];
   
   const dirsToCopy = ['src', 'dist', 'extension', 'examples', 'tests'];
@@ -112,7 +112,7 @@ node "%STINGRAY_ROOT%\\bin\\stingray.js" %*
     '  stingray run app.stngr   - Compile and run\n\n' +
     'Shortcuts: sr, stngr, sdev, sb\n\n' +
     'Extension: .stngr\n' +
-    'Logo: Assets/logo.ico\n'
+    'Logo: Assets/logo.png\n'
   );
   
   printSuccess('Standalone launcher created');
@@ -457,7 +457,7 @@ function createPortablePackage() {
   // Copy essential files to portable folder
   const portableFiles = [
     'bin/stingray.js', 'bin/stingray.bat', 'bin/stngr.bat', 'bin/sr.bat',
-    'package.json', 'stingray.json', 'Assets/logo.ico'
+    'package.json', 'stingray.json', 'Assets/logo.png'
   ];
   
   for (const f of portableFiles) {
