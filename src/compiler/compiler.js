@@ -18,15 +18,16 @@ function printWutError(error, context = '') {
     return color ? colors[color] + text + colors.reset : text;
   }
   
-  console.log(c('\n╔══════════════════════════════════════════════════════╗', 'red'));
-  console.log(c('║                                                      ║', 'red'));
-  console.log(c('║   ' + c('WUT?', colors.bgRed + colors.white + colors.bold) + c('                                     ║', 'red'));
-  console.log(c('║                                                      ║', 'red'));
-  console.log(c('╚══════════════════════════════════════════════════════╝', 'red'));
+  console.log(c('\n+======================================================+', 'red'));
+  console.log(c('|                                                      |', 'red'));
+  const wutLine = '|   ' + c('WUT?', 'bgRed') + '                                     |';
+  console.log(c(wutLine, 'red'));
+  console.log(c('|                                                      |', 'red'));
+  console.log(c('+======================================================+', 'red'));
   
-  console.log(c('\n' + '─'.repeat(55), 'dim'));
+  console.log(c('\n' + '-'.repeat(55), 'dim'));
   console.log(c('  Full Error Log:', 'underline' + 'bold'));
-  console.log(c('  ' + '─'.repeat(50), 'dim'));
+  console.log(c('  ' + '-'.repeat(50), 'dim'));
   console.log(`    Timestamp:  ${new Date().toISOString()}`);
   console.log(`    Node:       ${process.version}`);
   console.log(`    Platform:   ${process.platform}`);
@@ -40,7 +41,7 @@ function printWutError(error, context = '') {
     });
   }
   
-  console.log(c('  ' + '─'.repeat(50), 'dim'));
+  console.log(c('  ' + '-'.repeat(50), 'dim'));
   console.log(c('\n  Tip: Check your .stngr file syntax.\n', 'cyan'));
 }
 

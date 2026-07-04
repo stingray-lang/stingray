@@ -276,11 +276,11 @@ async function main() {
     setupSystemIntegration();
     createQuickStartScripts();
     console.log('');
-  }
-  
+}
+
   // Load and run CLI
   try {
-    const { StingrayCLI } = require('./cli/cli');
+    const { StingrayCLI } = require('../src/cli/cli');
     const cli = new StingrayCLI();
     await cli.run(args);
   } catch (err) {
@@ -291,7 +291,7 @@ async function main() {
       setupSystemIntegration();
       
       try {
-        const { StingrayCLI } = require('./cli/cli');
+        const { StingrayCLI } = require('../src/cli/cli');
         const cli = new StingrayCLI();
         await cli.run(args);
       } catch (e2) {

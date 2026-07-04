@@ -20,8 +20,8 @@
         "aliases": ["Stingray", "stingray"],
         "extensions": [".stngr"],
         "icon": {
-          "light": "./assets/logo.png",
-          "dark": "./assets/logo.png"
+          "light": ".Assets/logo.ico",
+          "dark": ".Assets/logo.ico"
         },
         "configuration": "./language-configuration.json"
       }
@@ -194,16 +194,7 @@
     ]
   },
   "activationEvents": [
-    "onLanguage:stingray",
-    "onCommand:stingray.compile",
-    "onCommand:stingray.build",
-    "onCommand:stingray.dev-server",
-    "onCommand:stingray.new-component",
-    "onCommand:stingray.new-page",
-    "onCommand:stingray.new-hook",
-    "onCommand:stingray.validate",
-    "onCommand:stingray.show-errors"
-  ],
+   ],
   "main": "./dist/extension.js",
   "scripts": {
     "vscode:prepublish": "npm run package-extension",

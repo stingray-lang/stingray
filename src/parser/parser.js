@@ -26,19 +26,19 @@ function colorize(text, color) {
 
 function printErrorBanner() {
   const banner = [
-    colorize('╔══════════════════════════════════════════════════════╗', COLORS.red),
-    colorize('║                                                      ║', COLORS.red),
-    colorize('║   ' + colorize('WUT?', COLORS.bgRed + COLORS.white + COLORS.bold) + colorize('                                     ║', COLORS.red)),
-    colorize('║                                                      ║', COLORS.red),
-    colorize('╚══════════════════════════════════════════════════════╝', COLORS.red)
+    colorize('+======================================================+', COLORS.red),
+    colorize('|                                                      |', COLORS.red),
+    colorize('|   ' + colorize('WUT?', COLORS.bgRed + COLORS.white + COLORS.bold) + colorize('                                     |', COLORS.red)),
+    colorize('|                                                      |', COLORS.red),
+    colorize('+======================================================+', COLORS.red)
   ].join('\n');
   console.log(banner);
 }
 
 function printStackTrace(errors) {
-  console.log(colorize('\n' + '─'.repeat(55), COLORS.dim));
+  console.log(colorize('\n' + '-'.repeat(55), COLORS.dim));
   console.log(colorize('  Stack Trace:', COLORS.yellow + COLORS.bold));
-  console.log(colorize('  ' + '─'.repeat(50), COLORS.dim));
+  console.log(colorize('  ' + '-'.repeat(50), COLORS.dim));
   
   for (let i = 0; i < errors.length; i++) {
     const err = errors[i];
@@ -60,14 +60,14 @@ function printStackTrace(errors) {
     }
   }
   
-  console.log(colorize('  ' + '─'.repeat(50), COLORS.dim));
+  console.log(colorize('  ' + '-'.repeat(50), COLORS.dim));
 }
 
 function printSuggestions(warnings) {
   if (warnings.length === 0) return;
   
   console.log(colorize('\n  Suggestions:', COLORS.magenta + COLORS.bold));
-  console.log(colorize('  ' + '─'.repeat(50), COLORS.dim));
+  console.log(colorize('  ' + '-'.repeat(50), COLORS.dim));
   
   for (const warn of warnings) {
     const icon = colorize('⚠', COLORS.yellow);
@@ -75,13 +75,13 @@ function printSuggestions(warnings) {
     console.log(`  ${icon} ${msg}`);
   }
   
-  console.log(colorize('  ' + '─'.repeat(50), COLORS.dim));
+  console.log(colorize('  ' + '-'.repeat(50), COLORS.dim));
 }
 
 function printSummary(errorCount, warningCount) {
   console.log(colorize('\n  Summary:', COLORS.bold));
   console.log(`    ${colorize(errorCount, COLORS.red)} error(s), ${colorize(warningCount, COLORS.yellow)} warning(s)`);
-  console.log(colorize('  ' + '─'.repeat(50), COLORS.dim));
+  console.log(colorize('  ' + '-'.repeat(50), COLORS.dim));
 }
 
 function printFullErrorLog(error, context = {}) {
@@ -90,7 +90,7 @@ function printFullErrorLog(error, context = {}) {
   const platform = process.platform;
   
   console.log(colorize('\n  Full Error Log:', COLORS.underline + COLORS.bold));
-  console.log(colorize('  ' + '─'.repeat(50), COLORS.dim));
+  console.log(colorize('  ' + '-'.repeat(50), COLORS.dim));
   console.log(`    Timestamp:  ${timestamp}`);
   console.log(`    Node:       ${nodeVersion}`);
   console.log(`    Platform:   ${platform}`);
@@ -121,7 +121,7 @@ function printFullErrorLog(error, context = {}) {
     }
   }
   
-  console.log(colorize('  ' + '─'.repeat(50), COLORS.dim));
+  console.log(colorize('  ' + '-'.repeat(50), COLORS.dim));
 }
 
 class StingrayParser {

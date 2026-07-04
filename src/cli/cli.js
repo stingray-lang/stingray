@@ -24,15 +24,16 @@ function printWutError(error, context = '') {
     return color ? colors[color] + text + colors.reset : text;
   }
   
-  console.log(c('\n╔══════════════════════════════════════════════════════╗', 'red'));
-  console.log(c('║                                                      ║', 'red'));
-  console.log(c('║   ' + c('WUT?', colors.bgRed + colors.white + colors.bold) + c('                                     ║', 'red'));
-  console.log(c('║                                                      ║', 'red'));
-  console.log(c('╚══════════════════════════════════════════════════════╝', 'red'));
+  console.log(c('\n+======================================================+', 'red'));
+  console.log(c('|                                                      |', 'red'));
+  const wutLine = '|   ' + c('WUT?', 'bgRed') + '                                     |';
+  console.log(c(wutLine, 'red'));
+  console.log(c('|                                                      |', 'red'));
+  console.log(c('+======================================================+', 'red'));
   
-  console.log(c('\n' + '─'.repeat(55), 'dim'));
+  console.log(c('\n' + '-'.repeat(55), 'dim'));
   console.log(c('  Full Error Log:', 'underline' + 'bold'));
-  console.log(c('  ' + '─'.repeat(50), 'dim'));
+  console.log(c('  ' + '-'.repeat(50), 'dim'));
   console.log(`    Timestamp:  ${new Date().toISOString()}`);
   console.log(`    Node:       ${process.version}`);
   console.log(`    Platform:   ${process.platform}`);
@@ -46,7 +47,7 @@ function printWutError(error, context = '') {
     });
   }
   
-  console.log(c('  ' + '─'.repeat(50), 'dim'));
+  console.log(c('  ' + '-'.repeat(50), 'dim'));
   console.log(c('\n  Tip: Check your .stngr file syntax. Run "stingray help" for usage.\n', 'cyan'));
 }
 
@@ -60,23 +61,19 @@ class StingrayCLI {
       'transpile': this.transpile.bind(this),
       'dev': this.dev.bind(this),
       'serve': this.serve.bind(this),
-      'run': this.run.bind(this),
+      'run': this.runFile.bind(this),
       'test': this.test.bind(this),
       'lint': this.lint.bind(this),
       'new': this.new.bind(this),
       'install': this.install.bind(this),
       'upgrade': this.upgrade.bind(this),
-      'info': this.info.bind(this),
-      'version': this.version.bind(this),
       'help': this.help.bind(this),
-      'example': this.example.bind(this),
-      'deploy': this.deploy.bind(this),
-      'preview': this.preview.bind(this)
+      'example': this.example.bind(this)
     };
   }
 
   async run(args = process.argv.slice(2)) {
-    const command = args[0];
+    let command = args[0];
     const subArgs = args.slice(1);
 
     // Smart detection: if a .stngr file is passed directly, auto-detect intent
@@ -85,9 +82,10 @@ class StingrayCLI {
     }
 
     // Single-letter shortcuts
-    const shortcuts = { 'i': 'init', 'b': 'build', 'c': 'compile', 't': 'transpile', 'd': 'dev', 's': 'serve', 'r': 'run', 'n': 'new', 'v': 'version', 'h': 'help', 'e': 'example', '-h': 'help', '--h': 'help', '-v': 'version', '--v': 'version' };
+    const shortcuts = { 'i': 'init', 'b': 'build', 'c': 'compile', 't': 'transpile', 'd': 'dev', 's': 'serve', 'r': 'run', 'n': 'new', 'v': 'version', 'h': 'help', 'e': 'example', '-h': 'help', '--h': 'help', '--help': 'help', '-v': 'version', '--v': 'version' };
     if (shortcuts[command]) {
-      args[0] = shortcuts[command];
+      command = shortcuts[command];
+      args[0] = command;
     }
 
     if (!command || command === 'help' || command === '--help' || command === '-h') {
@@ -292,7 +290,7 @@ class StingrayCLI {
     await runtime.startServer();
   }
 
-  async run(args) {
+  async runFile(args) {
     const file = args[0];
     
     if (!file) {
@@ -458,56 +456,11 @@ class StingrayCLI {
     return issues;
   }
 
-  async test(args) {
-    console.log('  🐟 Running tests...\n');
-    const testDir = args.find(a => !a.startsWith('--')) || './tests';
-    const files = this.findTestFiles(testDir);
-
-    if (files.length === 0) { console.log('  No test files found.\n'); return; }
-
-    let passed = 0, failed = 0, total = 0;
-    for (const file of files) {
-      total++;
-      try {
-        require(file);
-        console.log(`  ✓ ${path.relative(process.cwd(), file)}`);
-        passed++;
-      } catch (error) {
-        console.error(`  ✗ ${path.relative(process.cwd(), file)}: ${error.message}`);
-        failed++;
-      }
-    }
-    console.log(`\n  Tests: ${total} total, ${passed} passed, ${failed} failed\n`);
-    if (failed > 0) process.exit(1);
-  }
-
-  async lint(args) {
-    const dir = args.find(a => !a.startsWith('--')) || './src';
-    const strict = args.includes('--strict');
-    console.log(`\n  🐟 Linting "${dir}"...\n`);
-    const stngrFiles = this.findStingrayFiles(dir);
-    let issues = 0;
-    for (const file of stngrFiles) issues += this.lintFile(file, strict);
-    if (issues === 0) console.log(`  ✅ No issues in ${stngrFiles.length} files.\n`);
-    else {
-      console.log(`  ⚠️  Found ${issues} issue(s) in ${stngrFiles.length} files.\n`);
-      if (strict) process.exit(1);
-    }
-  }
-
-  async transpile(args) {
-    const entry = args[0] || './src';
-    console.log(`\n  🐟 Transpiling "${entry}"...\n`);
-    const compiler = new StingrayCompiler({ minify: false, react: true, materialWeb: true });
-    const result = await compiler.compileProject(entry, './dist/transpiled');
-    if (result.success) console.log(`  ✅ Transpiled to ./dist/transpiled/\n`);
-  }
-
   showHelp() {
     console.log(`
-\x1b[1m\x1b[36m  ╔══════════════════════════════════════════════════════╗\x1b[0m
-\x1b[1m\x1b[36m  ║             🐟 STINGRAY LANGUAGE CLI              ║\x1b[0m
-\x1b[1m\x1b[36m  ╚══════════════════════════════════════════════════════╝\x1b[0m
+\x1b[1m\x1b[36m  +======================================================+\x1b[0m
+\x1b[1m\x1b[36m  |             🐟 STINGRAY LANGUAGE CLI              |\x1b[0m
+\x1b[1m\x1b[36m  +======================================================+\x1b[0m
 
 \x1b[33m  USAGE\x1b[0m
     stingray <command> [options]
@@ -548,9 +501,9 @@ class StingrayCLI {
 
   async example(args) {
     console.log(`
-\x1b[1m\x1b[36m  ╔══════════════════════════════════════════════════════╗\x1b[0m
-\x1b[1m\x1b[36m  ║        STINGRAY CODE SNIPPETS & GUIDE              ║\x1b[0m
-\x1b[1m\x1b[36m  ╚══════════════════════════════════════════════════════╝\x1b[0m
+\x1b[1m\x1b[36m  +======================================================+\x1b[0m
+\x1b[1m\x1b[36m  |        STINGRAY CODE SNIPPETS & GUIDE              |\x1b[0m
+\x1b[1m\x1b[36m  +======================================================+\x1b[0m
 
 \x1b[32m  #1: Hello World\x1b[0m
 component App {
