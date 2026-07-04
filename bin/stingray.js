@@ -13,7 +13,7 @@ const GLOBAL_BIN = path.join(os.homedir(), '.stingray', 'bin');
 
 function printBanner() {
   console.log('\n' + '═'.repeat(60));
-  console.log('  🐟  S T I N G R A Y   L A N G U A G E   v1.0.0');
+  console.log('  🐟  S T I N G R A Y   L A N G U A G E   v1.0.2');
   console.log('  HTML + CSS + JS + React  →  .stngr');
   console.log('═'.repeat(60) + '\n');
 }

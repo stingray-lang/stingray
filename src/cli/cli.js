@@ -459,7 +459,7 @@ class StingrayCLI {
   showHelp() {
     console.log(`
 \x1b[1m\x1b[36m  +======================================================+\x1b[0m
-\x1b[1m\x1b[36m  |             🐟 STINGRAY LANGUAGE CLI              |\x1b[0m
+\x1b[1m\x1b[36m  |             STINGRAY LANGUAGE CLI              |\x1b[0m
 \x1b[1m\x1b[36m  +======================================================+\x1b[0m
 
 \x1b[33m  USAGE\x1b[0m

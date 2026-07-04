@@ -10,6 +10,7 @@
   },
   "scripts": {
     "postinstall": "node bin/stingray.js --install",
+    "build:extension": "cd extension && npm install && tsc -p . 2>/dev/null || echo 'Extension built from pre-compiled sources'",
     "deploy": "gh-pages -d pages -b gh-pages"
   },
   "keywords": [

@@ -164,35 +164,44 @@ class StingrayRuntime {
     };
 
     // Global console with Stingray branding
+    const _origLog = console.log;
+    const _origError = console.error;
+    const _origWarn = console.warn;
+    const _origInfo = console.info;
+    const _origDebug = console.debug;
     global.console = {
       log: (...args) => {
-        console.log('[Stingray]', ...args);
+        _origLog('[Stingray]', ...args);
       },
       error: (...args) => {
-        console.error('[Stingray ERROR]', ...args);
+        _origError('[Stingray ERROR]', ...args);
       },
       warn: (...args) => {
-        console.warn('[Stingray WARN]', ...args);
+        _origWarn('[Stingray WARN]', ...args);
       },
       info: (...args) => {
-        console.info('[Stingray INFO]', ...args);
+        _origInfo('[Stingray INFO]', ...args);
       },
       debug: (...args) => {
         if (this.options.debug) {
-          console.debug('[Stingray DEBUG]', ...args);
+          _origDebug('[Stingray DEBUG]', ...args);
         }
       }
     };
 
     // Global setTimeout/setInterval with cleanup
+    const _origSetTimeout = global.setTimeout;
+    const _origClearTimeout = global.clearTimeout;
+    const _origSetInterval = global.setInterval;
+    const _origClearInterval = global.clearInterval;
     global.setTimeout = (fn, delay, ...args) => {
-      const id = setTimeout(() => fn(...args), delay);
+      const id = _origSetTimeout(() => fn(...args), delay);
       return id;
     };
     
-    global.clearTimeout = (id) => clearTimeout(id);
-    global.setInterval = (fn, delay, ...args) => setInterval(() => fn(...args), delay);
-    global.clearInterval = (id) => clearInterval(id);
+    global.clearTimeout = (id) => _origClearTimeout(id);
+    global.setInterval = (fn, delay, ...args) => _origSetInterval(() => fn(...args), delay);
+    global.clearInterval = (id) => _origClearInterval(id);
 
     // Global navigator (browser compatibility)
     global.navigator = {
@@ -258,7 +267,7 @@ class StingrayRuntime {
 
     // Global Stingray-specific APIs
     global.stingray = {
-      version: '1.0.0',
+      version: '1.0.2',
       env: this.options.env || 'development',
       platform: process.platform,
       isBrowser: typeof window !== 'undefined',
